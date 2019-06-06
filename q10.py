@@ -15,3 +15,29 @@
 ## jjj,18
 ##
 ##
+
+import pandas
+import datetime
+df = pandas.read_csv('data.csv', sep='\t', encoding='latin-1', header=None, parse_dates=[2])
+dfi=[]
+dfi=df[[4]]
+dic=[]
+dic2=[]
+for a in dfi[4]:
+    b = a.split(',')
+    for c in b:
+        dic.append(c.split(':')[0])
+        dic2.append(c.split(':')[-1])
+
+lista = {'A': dic,
+        'B': dic2
+        }
+
+df = pandas.DataFrame(lista,columns= ['A', 'B'])
+df = df.groupby('A').count()
+index = df.index
+valores = df['B'].values
+i=0
+while i < 10:
+    print(index[i] + ',' + str(valores[i]))
+    i=i+1
